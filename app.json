@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Ne_Yesem",
+    "slug": "Ne_Yesem",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Ne_Yesem"
+}
