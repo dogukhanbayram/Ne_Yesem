@@ -11,6 +11,7 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import RandomFoodScreen from './screens/RandomFoodScreen';
+import { getFirestore } from 'firebase/firestore';
 //import { getAnalytics } from "firebase/analytics";
 
 
@@ -26,6 +27,7 @@ const firebaseConfig = {
 
 
 const app = firebase.initializeApp(firebaseConfig);
+export const db = getFirestore();
 const auth = getAuth();
 //const analytics = getAnalytics(app);
 
