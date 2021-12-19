@@ -1,36 +1,37 @@
 import { getAuth, signOut } from 'firebase/auth';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const HomeScreen = () => {
 
-    const navigation = useNavigation()
-    
 
-    const handleRandomFoodSuggest = () => {
-        navigation.navigate("Random Food")
-    }
+const handleSignOut = () => {
+    signOut(auth)
+    .then(()=>{
+        navigation.replace('Login')
+    })
+}
 
+const Settings = () => {
+    const auth = getAuth();
     return (
         <View style = {styles.container}>
-            
+            <Text>
+                Email: {auth.currentUser?.email}
+            </Text>
             <TouchableOpacity
-                    onPress={handleRandomFoodSuggest}
-                    style={styles.button}
-                >
-                    <Text style = {styles.buttonText}>
-                        Ne Yesem?
-                    </Text>
-
-                </TouchableOpacity>
-            
+                onPress={handleSignOut}
+                style={styles.button}
+            >
+                <Text style = {styles.buttonText}>
+                    Sign Out
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
 
-export default HomeScreen
+export default Settings
 
 const styles = StyleSheet.create({
     container:{
@@ -57,5 +58,4 @@ const styles = StyleSheet.create({
         fontWeight:'700',
         fontSize:16,
     },
-
 })

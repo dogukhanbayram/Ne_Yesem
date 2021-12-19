@@ -1,6 +1,6 @@
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity  } from 'react-native';
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 
@@ -14,7 +14,7 @@ const LoginScreen = () => {
         const auth = getAuth();
         onAuthStateChanged(auth, user=>{
             if(user) {
-                navigation.replace("Home")
+                navigation.replace("Drawer")
             }
         })
     }, [])
