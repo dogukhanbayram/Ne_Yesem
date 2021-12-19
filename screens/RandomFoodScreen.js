@@ -1,54 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, getFirestore, onSnapshot } from "firebase/firestore";
+import { collection, getDocs, getFirestore, onSnapshot, QuerySnapshot } from "firebase/firestore";
 import { Dimensions, ListViewBase, StyleSheet, Text, View } from 'react-native';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { db } from '../App';
 import { Button } from 'react-native-web';
 import { querystring } from '@firebase/util';
 import react from 'react';
 
-async function getFoods(){
-    const querySnapshot = await getDocs(collection(db, "Foods"));
-    const foodlist = querySnapshot.docs.map(doc=>doc.data()); 
-    console.log(foodlist);
-    return foodlist;
-}
-const foodList = getFoods();
 
 const RandomFoodScreen = () => {
     
-    // const[foods,setFoods]=useState("")
-    
-    // const readData = () =>{
-    //     getDocs(collection(db,"Foods")).then(snapshot=>{
-    //         setFoods(Object.values(snapshot.val()))
-    //     })
-    // }
+    const[foods,setFoods]=useState([])
 
+    const fetchFoods = async () => {
+        const foodsCollection = await getDocs(collection(db,'Foods'))
+        
+        foodsCollection.forEach((doc)=> {
+            console.log(doc.id, "=>", doc.data());
+        })
+        setFoods(
+            foodsCollection.docs.map((doc)=>{
+            return {...doc.data(), id:doc.id}
+        }))
+    }
     
+    useEffect(()=>{
+        fetchFoods()
+    }, [])
     
-    // var foodList = [];
-    // const getFoods = async()=>{
-    //     const querySnapshot = await getDocs(collection(db, "Foods"));
-    //     return querySnapshot.docs.map(doc=>doc.data());
-    // }
-
-
     return(
             <View style = {styles.container}>
-            {/* <TouchableOpacity
-                onPress={getFoods()}
-                style={styles.button}
-            >
-                <Text style = {styles.buttonText}>
-                    Veri Getir
+                <Text style = {{marginTop: 2}}>
+                    Yemek
                 </Text>
-            </TouchableOpacity> */}
                 <FlatList
                 style={{marginTop:10,padding:10}}
-                data={foodList}
-                renderItem={({item}) => <Text> {item} </Text>}
+                data={foods}
+                renderItem={({item}) => 
+                    <View style={{width:Dimensions.get("window").width/2.5,padding:5,alignItems:"center",justifyContent:"center"}}>
+                        <Text style={{fontSize:24,fontWeight:"bold"}}> {item.name} </Text>
+                        <Text style={{fontSize:18}}> İçindekiler: </Text>
+                    <Text> {item.ingredients.join(' ')} </Text>
+                    </View>
+                }
                 ItemSeparatorComponent={()=><View style ={{marginVertical:5,borderWidth:0.5}}/>}
                 />
             </View>
