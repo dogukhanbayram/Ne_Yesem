@@ -2,17 +2,21 @@ import { getAuth, signOut } from 'firebase/auth';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 
 
-const handleSignOut = () => {
+const handleSignOut = (auth) => {
     signOut(auth)
-    .then(()=>{
-        navigation.replace('Login')
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error.message);
     })
 }
 
 const Settings = () => {
+    const navigation = useNavigation();
     const auth = getAuth();
     return (
         <View style = {styles.container}>
@@ -20,7 +24,7 @@ const Settings = () => {
                 Email: {auth.currentUser?.email}
             </Text>
             <TouchableOpacity
-                onPress={handleSignOut}
+                onPress={()=>{handleSignOut(auth);navigation.replace('Login')}}
                 style={styles.button}
             >
                 <Text style = {styles.buttonText}>

@@ -16,6 +16,9 @@ const LoginScreen = () => {
             if(user) {
                 navigation.replace("Drawer")
             }
+            else{
+                
+            }
         })
     }, [])
 
