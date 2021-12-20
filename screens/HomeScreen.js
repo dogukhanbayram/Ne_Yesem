@@ -1,61 +1,106 @@
 import { getAuth, signOut } from 'firebase/auth';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, StatusBar } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const HomeScreen = () => {
 
     const navigation = useNavigation()
-    
 
     const handleRandomFoodSuggest = () => {
         navigation.navigate("Random Food")
     }
 
     return (
-        <View style = {styles.container}>
-            
+
+        <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+            <StatusBar translucent backgroundColor='transparent' />
+            <Image source={require('../images/food.jpg')}
+                style={styles.image}
+            />
+            <View style={styles.indicatorContainer}>
+                <View style={styles.indicator} />
+                <View style={styles.indicator} />
+                <View style={[styles.indicator, styles.indicatorActive]} />
+            </View>
+            <View style={{ paddingHorizontal: 20, paddingTop: 20 }}>
+                <View>
+                    <Text style={styles.title}>Bugün ne </Text>
+                    <Text style={styles.title}>yemek istersin?</Text>
+                </View>
+                <View style={{ marginTop: 10 }}>
+                    <Text style={styles.textStyle}>Ne çıkarsa artık karşına </Text>
+                </View>
+            </View>
             <TouchableOpacity
-                    onPress={handleRandomFoodSuggest}
-                    style={styles.button}
-                >
-                    <Text style = {styles.buttonText}>
-                        Ne Yesem?
-                    </Text>
+                onPress={handleRandomFoodSuggest}
+                style={styles.button}
+            >
+                <Text style={styles.buttonText}>
+                    Ne Yesem?
+                </Text>
 
-                </TouchableOpacity>
-            
-        </View>
-    )
-}
+            </TouchableOpacity>
+        </SafeAreaView >
 
-export default HomeScreen
+    );
+};
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
+
+    button: {
+        height: 60,
+        marginTop: 40,
+        marginHorizontal: 20,
+        backgroundColor: 'orange',
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    button:{
-        backgroundColor:'blue',
-        width:'60%',
-        padding:15,
-        borderRadius:10,
-        alignItems:'center',
-        marginTop:40,
+    buttonOutline: {
+        backgroundColor: 'white',
+        marginTop: 5,
+        borderColor: 'blue',
+        borderWidth: 2,
     },
-    buttonOutline:{
-        backgroundColor:'white',
-        marginTop:5,
-        borderColor:'blue',
-        borderWidth:2,
+    buttonText: {
+        color: 'white',
+        fontWeight: '700',
+        fontSize: 16,
     },
-    buttonText:{
-        color:'white',
-        fontWeight:'700',
-        fontSize:16,
+    image: {
+        height: 420,
+        width: '100%',
+        borderBottomLeftRadius: 100,
+    },
+    indicatorContainer: {
+        height: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    indicator: {
+        height: 3,
+        width: 30,
+        backgroundColor: 'grey',
+        marginHorizontal: 5,
+        borderRadius: 5,
+    },
+    indicatorActive: {
+        backgroundColor: 'white'
+    },
+    title: {
+        fontSize: 32,
+        fontWeight: 'bold',
+        color: 'white'
+    },
+    textStyle: {
+        fontSize: 16,
+        color: 'white'
     },
 
 })
+
+export default HomeScreen
