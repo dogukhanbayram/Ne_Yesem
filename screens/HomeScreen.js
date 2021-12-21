@@ -2,7 +2,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Image, StatusBar } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const HomeScreen = () => {
@@ -16,33 +16,35 @@ const HomeScreen = () => {
     return (
 
         <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
-            <StatusBar translucent backgroundColor='transparent' />
-            <Image source={require('../images/food.jpg')}
-                style={styles.image}
-            />
-            <View style={styles.indicatorContainer}>
-                <View style={styles.indicator} />
-                <View style={styles.indicator} />
-                <View style={[styles.indicator, styles.indicatorActive]} />
-            </View>
-            <View style={{ paddingHorizontal: 20, paddingTop: 20 }}>
-                <View>
-                    <Text style={styles.title}>Bugün ne </Text>
-                    <Text style={styles.title}>yemek istersin?</Text>
+            <ScrollView>
+                <StatusBar translucent backgroundColor='transparent' />
+                <Image source={require('../images/food.jpg')}
+                    style={styles.image}
+                />
+                <View style={styles.indicatorContainer}>
+                    <View style={styles.indicator} />
+                    <View style={styles.indicator} />
+                    <View style={[styles.indicator, styles.indicatorActive]} />
                 </View>
-                <View style={{ marginTop: 10 }}>
-                    <Text style={styles.textStyle}>Ne çıkarsa artık karşına </Text>
+                <View style={{ paddingHorizontal: 20, paddingTop: 20 }}>
+                    <View>
+                        <Text style={styles.title}>Bugün ne </Text>
+                        <Text style={styles.title}>yemek istersin?</Text>
+                    </View>
+                    <View style={{ marginTop: 10 }}>
+                        <Text style={styles.textStyle}>Ne çıkarsa artık karşına </Text>
+                    </View>
                 </View>
-            </View>
-            <TouchableOpacity
-                onPress={handleRandomFoodSuggest}
-                style={styles.button}
-            >
-                <Text style={styles.buttonText}>
-                    Ne Yesem?
-                </Text>
+                <TouchableOpacity
+                    onPress={handleRandomFoodSuggest}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>
+                        Ne Yesem?
+                    </Text>
 
-            </TouchableOpacity>
+                </TouchableOpacity>
+            </ScrollView>
         </SafeAreaView >
 
     );
@@ -102,5 +104,4 @@ const styles = StyleSheet.create({
     },
 
 })
-
 export default HomeScreen
