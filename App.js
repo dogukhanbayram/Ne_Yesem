@@ -40,7 +40,7 @@ const Tab = createBottomTabNavigator();
 
 function DrawerNav(){
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator screenOptions={{drawerActiveTintColor:'orange'}}>
       <Drawer.Screen options={{title:"Home"}} name="BottomNav" component={BottomNav}/>
       <Drawer.Screen name="Random Food" component={RandomFoodScreen}/>
       <Drawer.Screen name="All Foods" component={AllFoodsScreen}/>
@@ -50,7 +50,7 @@ function DrawerNav(){
 
 function BottomNav(){
   return(
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{tabBarActiveTintColor:'orange'}}>
       <Drawer.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
       <Drawer.Screen options={{ headerShown: false }} name="Settings" component={SettingsScreen}/>
     </Tab.Navigator>

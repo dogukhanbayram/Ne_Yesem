@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         marginTop:40,
     },
     button:{
-        backgroundColor:'blue',
+        backgroundColor:'orange',
         width:'100%',
         padding:15,
         borderRadius:10,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     buttonOutline:{
         backgroundColor:'white',
         marginTop:5,
-        borderColor:'blue',
+        borderColor:'orange',
         borderWidth:2,
     },
     buttonText:{
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         fontSize:16,
     },
     buttonOutlineText:{
-        color:'blue',
+        color:'orange',
         fontWeight:'700',
         fontSize:16,
     },
