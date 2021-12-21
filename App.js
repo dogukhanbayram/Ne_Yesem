@@ -13,6 +13,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import RandomFoodScreen from './screens/RandomFoodScreen';
 import AllFoodsScreen from './screens/AllFoodsScreen';
 import { getFirestore } from 'firebase/firestore';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 //import { getAnalytics } from "firebase/analytics";
 
 
@@ -51,8 +52,12 @@ function DrawerNav(){
 function BottomNav(){
   return(
     <Tab.Navigator screenOptions={{tabBarActiveTintColor:'orange'}}>
-      <Drawer.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
-      <Drawer.Screen options={{ headerShown: false }} name="Settings" component={SettingsScreen}/>
+      <Tab.Screen options={{ headerShown: false, 
+      tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}} 
+      name="Home" component={HomeScreen} />
+      <Tab.Screen options={{ headerShown: false, 
+      tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="account-cog" color={color} size={size} />)}} 
+      name="Settings" component={SettingsScreen}/>
     </Tab.Navigator>
   )
 }
