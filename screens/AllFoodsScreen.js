@@ -2,25 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { collection, doc, getDocs, getFirestore, onSnapshot, QuerySnapshot,query } from "firebase/firestore";
 import { Dimensions, ListViewBase, StyleSheet, Text, View } from 'react-native';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { db } from '../App';
-import { Button } from 'react-native-web';
-import { querystring } from '@firebase/util';
-import react from 'react';
-import { render } from 'react-dom';
 
+const AllFoodsScreen = () => {
 
-const RandomFoodScreen = () => {
-    
     const[foods,setFoods]=useState([])
 
     const fetchFoods = async () => {
         const fetchedFoods = [];
         const q = query(collection(db,"Foods"));
         const unsubscribe = onSnapshot(q,(querySnapshot)=>{
-            const index = querySnapshot.size;
-            const randomID = Math.floor(Math.random()*index);
-            fetchedFoods.push(querySnapshot.docs[randomID].data())
+            querySnapshot.forEach((doc)=>{
+                fetchedFoods.push(doc.data());
+            })
             setFoods(fetchedFoods);
         })
     }
@@ -33,14 +27,6 @@ const RandomFoodScreen = () => {
                     <Text style = {{marginTop: 2}}>
                         Yemek
                     </Text>
-                    <TouchableOpacity
-                        onPress={fetchFoods}
-                        style={styles.button}
-                    >
-                    <Text style = {styles.buttonText}>
-                            Yeni Getir
-                        </Text>
-                    </TouchableOpacity>
                     <FlatList
                     style={{marginTop:10,padding:10}}
                     data={foods}
@@ -58,7 +44,7 @@ const RandomFoodScreen = () => {
         )
 }
 
-export default RandomFoodScreen
+export default AllFoodsScreen
 
 const styles = StyleSheet.create({
     container:{

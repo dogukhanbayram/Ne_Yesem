@@ -11,6 +11,7 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import RandomFoodScreen from './screens/RandomFoodScreen';
+import AllFoodsScreen from './screens/AllFoodsScreen';
 import { getFirestore } from 'firebase/firestore';
 //import { getAnalytics } from "firebase/analytics";
 
@@ -42,6 +43,7 @@ function DrawerNav(){
     <Drawer.Navigator>
       <Drawer.Screen options={{title:"Home"}} name="BottomNav" component={BottomNav}/>
       <Drawer.Screen name="Random Food" component={RandomFoodScreen}/>
+      <Drawer.Screen name="All Foods" component={AllFoodsScreen}/>
     </Drawer.Navigator>
   );
 }
