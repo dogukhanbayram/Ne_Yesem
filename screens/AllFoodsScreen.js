@@ -50,7 +50,7 @@ const AllFoodsScreen = () => {
                     renderItem={({ item }) =>
 
                         <TouchableOpacity onPress={()=>toRecipeScreen(item)} style={styles.card}>
-                            <Image source={foods.Image} style={styles.cardImage} />
+                            <Image source={item.Image} style={styles.cardImage} />
                             <Text style={{ fontSize: 24, fontWeight: "bold" }}> {item.name} </Text>
                             <Text style={{ fontSize: 18 }}> İçindekiler: </Text>
                             <Text> {item.ingredients.join(' ')} </Text>
