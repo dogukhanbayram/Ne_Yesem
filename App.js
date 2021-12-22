@@ -17,6 +17,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 //import { getAnalytics } from "firebase/analytics";
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
+import RecipeScreen from './screens/RecipeScreen';
 
 
 const firebaseConfig = {
@@ -120,6 +121,7 @@ export default class App extends React.Component {
         <Stack.Navigator>
           <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen}/>
           <Stack.Screen options={{ headerShown: false }} name="Drawer" component={DrawerNav}/>
+          <Stack.Screen  name="RecipeScreen" component={RecipeScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

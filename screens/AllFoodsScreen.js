@@ -3,6 +3,7 @@ import { collection, doc, getDocs, getFirestore, onSnapshot, QuerySnapshot, quer
 import { Dimensions, ListViewBase, StyleSheet, Text, View, SafeAreaView, TextInput, Image } from 'react-native';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { db } from '../App';
+import { useNavigation } from '@react-navigation/native';
 
 const AllFoodsScreen = () => {
 
@@ -21,6 +22,12 @@ const AllFoodsScreen = () => {
     useEffect(() => {
         fetchFoods();
     }, [])
+
+    const navigation = useNavigation()
+
+    const toRecipeScreen = (props) => {
+        navigation.navigate("RecipeScreen",{paramKey:props})
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -42,12 +49,12 @@ const AllFoodsScreen = () => {
                     data={foods}
                     renderItem={({ item }) =>
 
-                        <View style={styles.card}>
+                        <TouchableOpacity onPress={()=>toRecipeScreen(item)} style={styles.card}>
                             <Image source={foods.Image} style={styles.cardImage} />
                             <Text style={{ fontSize: 24, fontWeight: "bold" }}> {item.name} </Text>
                             <Text style={{ fontSize: 18 }}> İçindekiler: </Text>
                             <Text> {item.ingredients.join(' ')} </Text>
-                        </View>
+                        </TouchableOpacity>
                     }
                 />
 

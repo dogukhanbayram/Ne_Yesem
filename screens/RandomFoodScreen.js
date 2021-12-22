@@ -8,6 +8,7 @@ import { Button } from 'react-native-web';
 import { querystring } from '@firebase/util';
 import react from 'react';
 import { render } from 'react-dom';
+import { useNavigation } from '@react-navigation/native';
 
 
 const RandomFoodScreen = () => {
@@ -28,6 +29,12 @@ const RandomFoodScreen = () => {
         fetchFoods();
     }, [])
 
+    const navigation = useNavigation()
+
+    const toRecipeScreen = (props) => {
+        navigation.navigate("RecipeScreen",{paramKey:props})
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             {/* <Text style = {styles.textStyle}>
@@ -45,12 +52,12 @@ const RandomFoodScreen = () => {
                 contentContainerStyle={{ marginBottom: 20, marginVertical: 20, marginTop: 20 }}
                 data={foods}
                 renderItem={({ item }) =>
-                    <View style={styles.card}>
+                    <TouchableOpacity onPress={()=>toRecipeScreen(item)} style={styles.card}>
                         <Image source={foods.Image} style={styles.cardImage} />
                         <Text style={{ fontSize: 24, fontWeight: "bold" }}> {item.name} </Text>
                         <Text style={{ fontSize: 18 }}> İçindekiler: </Text>
                         <Text> {item.ingredients.join(' ')} </Text>
-                    </View>
+                    </TouchableOpacity>
                 }
             />
         </SafeAreaView>
