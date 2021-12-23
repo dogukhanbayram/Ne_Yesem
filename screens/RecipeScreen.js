@@ -8,11 +8,12 @@ const RecipeScreen = ({ route }) => {
 
     const navigation = useNavigation()
     navigation.setOptions({ title: route.params.paramKey.name })
+    const foodImage = {uri: route.params.paramKey.url};
 
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={require('../images/patates.jpg')}
+                source={foodImage}
                 style={styles.image}
                 imageStyle={{ borderBottomLeftRadius: 30, borderBottomRightRadius: 30 }}
             >
