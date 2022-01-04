@@ -1,9 +1,7 @@
-import { getAuth, signOut } from 'firebase/auth';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Image, StatusBar } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const HomeScreen = () => {
 
@@ -21,11 +19,6 @@ const HomeScreen = () => {
                 <Image source={require('../images/food.jpg')}
                     style={styles.image}
                 />
-                <View style={styles.indicatorContainer}>
-                    <View style={styles.indicator} />
-                    <View style={styles.indicator} />
-                    <View style={[styles.indicator, styles.indicatorActive]} />
-                </View>
                 <View style={{ paddingHorizontal: 20, paddingTop: 20 }}>
                     <View>
                         <Text style={styles.title}>Bugün ne </Text>

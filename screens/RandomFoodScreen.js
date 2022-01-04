@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { collection, doc, getDocs, getFirestore, onSnapshot, QuerySnapshot, query } from "firebase/firestore";
-import { Dimensions, ListViewBase, StyleSheet, Text, View, Image } from 'react-native';
-import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { StyleSheet, Text, Image } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { db } from '../App';
-import { Button } from 'react-native-web';
-import { querystring } from '@firebase/util';
-import react from 'react';
-import { render } from 'react-dom';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -53,7 +49,7 @@ const RandomFoodScreen = () => {
                 data={foods}
                 renderItem={({ item }) =>
                     <TouchableOpacity onPress={()=>toRecipeScreen(item)} style={styles.card}>
-                        <Image source={foods.Image} style={styles.cardImage} />
+                        <Image source={{uri: item.url}} style={styles.cardImage} />
                         <Text style={{ fontSize: 24, fontWeight: "bold" }}> {item.name} </Text>
                         <Text style={{ fontSize: 18 }}> İçindekiler: </Text>
                         <Text> {item.ingredients.join(' ')} </Text>

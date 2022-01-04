@@ -2,7 +2,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const handleSignOut = (auth) => {
     signOut(auth)

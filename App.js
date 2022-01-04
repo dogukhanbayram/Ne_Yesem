@@ -1,9 +1,8 @@
 import * as firebase from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -14,7 +13,6 @@ import RandomFoodScreen from './screens/RandomFoodScreen';
 import AllFoodsScreen from './screens/AllFoodsScreen';
 import { getFirestore } from 'firebase/firestore';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-//import { getAnalytics } from "firebase/analytics";
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import RecipeScreen from './screens/RecipeScreen';
@@ -30,57 +28,13 @@ const firebaseConfig = {
   measurementId: "G-SSCG1MCWTW"
 };
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
-
-
 const app = firebase.initializeApp(firebaseConfig);
 export const db = getFirestore();
 const auth = getAuth();
-//const analytics = getAnalytics(app);
-
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-
-registerForPushNotificationsAsync = async () => {
-  if (Constants.isDevice) {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
-      return;
-    }
-    const token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
-    this.setState({ expoPushToken: token });
-  } else {
-    alert('Must use physical device for Push Notifications');
-  }
-
-  if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
-    });
-  }
-
-  
-
-};
-
 
 
 function DrawerNav(){
@@ -107,14 +61,6 @@ function BottomNav(){
 }
 
 export default class App extends React.Component {
-  state = {
-    notification: {},
-  };
-  
-  componentDidMount() {
-    registerForPushNotificationsAsync();
-  }
-
   render() {
     return (
       <NavigationContainer>

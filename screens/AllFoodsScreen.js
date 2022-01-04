@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { collection, doc, getDocs, getFirestore, onSnapshot, QuerySnapshot, query } from "firebase/firestore";
-import { Dimensions, ListViewBase, StyleSheet, Text, View, SafeAreaView, TextInput, Image } from 'react-native';
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { StyleSheet, Text, View, SafeAreaView, TextInput, Image } from 'react-native';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { db } from '../App';
 import { useNavigation } from '@react-navigation/native';
@@ -31,34 +31,19 @@ const AllFoodsScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        paddingHorizontal: 20
-                    }}>
-                    <View style={styles.searchInputContainer}>
-                        <TextInput placeholder='Search Food'></TextInput>
-                    </View>
-                    <View style={styles.sortBtn}></View>
-                </View>
-
                 <FlatList
                     contentContainerStyle={{ marginBottom: 20, marginVertical: 20, marginTop: 20 }}
                     data={foods}
                     renderItem={({ item }) =>
 
                         <TouchableOpacity onPress={()=>toRecipeScreen(item)} style={styles.card}>
-                            <Image source={item.Image} style={styles.cardImage} />
+                            <Image source={{uri: item.url}} style={styles.cardImage} />
                             <Text style={{ fontSize: 24, fontWeight: "bold" }}> {item.name} </Text>
                             <Text style={{ fontSize: 18 }}> İçindekiler: </Text>
                             <Text> {item.ingredients.join(' ')} </Text>
                         </TouchableOpacity>
                     }
                 />
-
-            </ScrollView>
         </SafeAreaView>
     )
 }
